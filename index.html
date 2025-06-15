@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام محاسبة المقاولات</title>
+    <style>
+        /* استايلات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* الشريط العلوي */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        /* الشريط السفلي */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        /* البنر */
+        .banner {
+            background-color: #007BFF;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 40px;
+        }
+
+        /* محتوى الصفحة الرئيسية */
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .stats .stat-card {
+            width: 48%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+        }
+
+        .stats .stat-card h4 {
+            margin-bottom: 10px;
+        }
+
+        /* استايلات للأزرار في الجدول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!-- الشريط العلوي -->
+<header>
+    <h1>نظام محاسبة المقاولات</h1>
+</header>
+
+<!-- البنر الرئيسي -->
+<div class="banner">
+    <h2>تابع تكاليف مشاريعك بسهولة واحصل على تقارير مالية دقيقة</h2>
+    <p>أداة شاملة لإدارة المقاولات من التكاليف إلى القوائم المالية</p>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="content">
+    <!-- قسم الحالة المالية -->
+    <div class="section">
+        <h2>الحالة المالية الحالية</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <h4>إجمالي الإيرادات</h4>
+                <p>500,000 ريال</p>
+            </div>
+            <div class="stat-card">
+                <h4>إجمالي التكاليف</h4>
+                <p>350,000 ريال</p>
+            </div>
+            <div class="stat-card">
+                <h4>الأرباح الصافية</h4>
+                <p>150,000 ريال</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم إدخال القيود المالية -->
+    <div class="section">
+        <h2>إدخال قيد محاسبي</h2>
+        <div class="card">
+            <label for="transaction-type">نوع المعاملة:</label>
+            <select id="transaction-type">
+                <option value="expense">مصاريف</option>
+                <option value="income">إيرادات</option>
+            </select>
+            <br><br>
+            <label for="amount">المبلغ:</label>
+            <input type="number" id="amount" placeholder="ادخل المبلغ">
+            <br><br>
+            <button class="btn" onclick="addTransaction()">إضافة المعاملة</button>
+        </div>
+    </div>
+
+    <!-- قسم عرض القيود المحاسبية -->
+    <div class="section">
+        <h2>القيود المحاسبية المسجلة</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>رقم القيد</th>
+                        <th>النوع</th>
+                        <th>المبلغ</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-list">
+                    <!-- سيتم إضافة القيود هنا بواسطة JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- الشريط السفلي -->
+<footer>
+    <p>جميع الحقوق محفوظة &copy; 2025</p>
+</footer>
+
+<script>
+    // بيانات القيود المحاسبية
+    let transactions = [];
+
+    // إضافة معاملة
+    function addTransaction() {
+        const transactionType = document.getElementById("transaction-type").value;
+        const amount = document.getElementById("amount").value;
+
+        if (!amount || isNaN(amount)) {
+            alert("الرجاء إدخال مبلغ صحيح.");
+            return;
+        }
+
+        const transaction = {
+            id: transactions.length + 1,
+            type: transactionType === "expense" ? "مصاريف" : "إيرادات",
+            amount: amount
+        };
+
+        transactions.push(transaction);
+        renderTransactions();
+    }
+
+    // عرض القيود في الجدول
+    function renderTransactions() {
+        const transactionsList = document.getElementById("transactions-list");
+        transactionsList.innerHTML = "";
+
+        transactions.forEach(transaction => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${transaction.id}</td>
+                <td>${transaction.type}</td>
+                <td>${transaction.amount} ريال</td>
+            `;
+            transactionsList.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>
