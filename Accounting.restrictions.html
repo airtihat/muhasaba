@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>القيود المحاسبية</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form.restriction-form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      background: #fff;
+      box-shadow: 0 0 8px rgba(0,0,0,0.03);
+    }
+
+    table thead {
+      background-color: #0077cc;
+      color: white;
+    }
+
+    table th, table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .action-btn {
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background-color: #ffc107;
+      color: white;
+      border: none;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>القيود المحاسبية</h1>
+
+  <!-- نموذج إضافة قيد -->
+  <form class="restriction-form" action="#" method="POST">
+    <div class="form-row">
+      <div class="form-group">
+        <label>تاريخ القيد</label>
+        <input type="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <label>نوع القيد</label>
+        <select name="type" required>
+          <option value="">-- اختر --</option>
+          <option value="يومي">قيد يومي</option>
+          <option value="افتتاحي">قيد افتتاحي</option>
+          <option value="تسوية">قيد تسوية</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>الحساب المدين</label>
+        <input type="text" name="debit_account" placeholder="مثال: الصندوق" required>
+      </div>
+
+      <div class="form-group">
+        <label>الحساب الدائن</label>
+        <input type="text" name="credit_account" placeholder="مثال: الإيرادات" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>المبلغ</label>
+        <input type="number" name="amount" step="0.01" required>
+      </div>
+
+      <div class="form-group">
+        <label>الوصف</label>
+        <textarea name="description" rows="2" placeholder="وصف القيد"></textarea>
+      </div>
+    </div>
+
+    <button type="submit">حفظ القيد</button>
+  </form>
+
+  <!-- جدول عرض القيود -->
+  <table>
+    <thead>
+      <tr>
+        <th>تاريخ</th>
+        <th>نوع</th>
+        <th>مدين</th>
+        <th>دائن</th>
+        <th>المبلغ</th>
+        <th>الوصف</th>
+        <th>تحكم</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2025-06-01</td>
+        <td>يومي</td>
+        <td>الصندوق</td>
+        <td>المبيعات</td>
+        <td>1500.00</td>
+        <td>إيداع نقدي</td>
+        <td>
+          <button class="action-btn edit-btn">تعديل</button>
+          <button class="action-btn delete-btn">حذف</button>
+        </td>
+      </tr>
+      <!-- يمكن ربطه لاحقاً من قاعدة البيانات -->
+    </tbody>
+  </table>
+
+</body>
+</html>
