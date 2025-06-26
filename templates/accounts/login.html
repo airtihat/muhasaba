@@ -1,0 +1,22 @@
+<!-- templates/accounts/login.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول</title>
+</head>
+<body>
+    <h2>تسجيل الدخول</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>اسم المستخدم:</label><br>
+        <input type="text" name="username"><br><br>
+
+        <label>كلمة المرور:</label><br>
+        <input type="password" name="password"><br><br>
+
+        <button type="submit">دخول</button>
+    </form>
+    <p>ليس لديك حساب؟ <a href="{% url 'register' %}">سجل الآن</a></p>
+</body>
+</html>

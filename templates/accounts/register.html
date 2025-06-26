@@ -1,0 +1,17 @@
+<!-- templates/accounts/register.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>التسجيل</title>
+</head>
+<body>
+    <h2>إنشاء حساب جديد</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">تسجيل</button>
+    </form>
+    <p>هل لديك حساب؟ <a href="{% url 'login' %}">تسجيل الدخول</a></p>
+</body>
+</html>
